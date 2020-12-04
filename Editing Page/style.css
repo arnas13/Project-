@@ -1,0 +1,123 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+}
+
+.coney {
+    font-family: Poppins,sans-serif;
+    font-weight: 300;
+    font-size: 34px;
+}
+
+.headTags {
+    display: flex;
+}
+
+.headerBtn {
+    margin: 10px;
+    font-family: Poppins,sans-serif;
+    font-size: 14px;
+}
+
+.headerBtn:hover {
+    color: rgb(22, 22, 241);
+    border-bottom: 2px solid rgb(22, 22, 241);
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+
+.homeBtn {
+    margin: 10px;
+    font-family: Poppins,sans-serif;
+    font-size: 14px;
+    color: rgb(22, 22, 241);
+    border-bottom: 2px solid rgb(22, 22, 241);
+}
+
+.socialBtn {
+    margin: 12px 5px;
+    font-size: 12px;
+}
+
+.socialBtn:hover {
+    color: rgb(22, 22, 241);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.searchBtn {
+    height: 20px;
+    width: 25px;
+    margin-top: 5px;
+    margin-left: 10px;
+    padding-top: 5px;
+    font-size: 15px;
+    font-weight: 100;
+    background-color: rgb(18, 18, 247);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.searchBtn:hover {
+    cursor: pointer;
+}
+
+.asideBtn:hover {
+    background-color: rgb(22, 22, 241);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+
+.asideBtn {
+    height: 20px;
+    width: 25px;
+    margin-top: 5px;
+    margin-left: 10px;
+    padding-top: 5px;
+    font-size: 15px;
+    font-weight: 100;
+    background-color: lightgray;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+}
+
+
+
+.background {
+    height: 490px;
+    background: url(background.jpg);
+    background-repeat: no-repeat;
+}
+
+.textInside {
+    margin: auto;
+    display: block;
+}
+
+#postsContainer {
+    display: flex;
+    width: 100vw;
+    flex-wrap: wrap;
+}
+
+
+
+.blogCard {
+    width: 250px ;
+    margin: 15px;
+    border-radius: 15px;
+}
+
+.blogImages {
+    width: 250px;
+    height: 200px;
+}
+
+.mt-2 {
+    margin-top: 15px;
+}
