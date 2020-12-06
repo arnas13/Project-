@@ -30,6 +30,10 @@ function updateBlogs() {
 
        let description = document.createElement('h5')
        description.innerText = json.data[i].description
+
+       let username = document.createElement('h5')
+       username.innerText = json.data[i].username
+       username.href = ""
        
 
         let timeText = document.createElement('h4')
@@ -49,42 +53,70 @@ function updateBlogs() {
         
         
         let updateButton = document.createElement('button')
-        updateButton.setAttribute('class', 'mt-2')
+        updateButton.setAttribute('class', 'editButton')
         updateButton.innerText = "EDIT"
         updateButton.addEventListener('click', addBlogModal)
 
         let removeButton = document.createElement('button')
-        removeButton.setAttribute('class', 'mt-2')
-        removeButton.innerText = "Remove"
-        removeButton.addEventListener('click', removeBlogModal)
-
-        let removeButton = document.createElement('button')
-        removeButton.setAttribute('class', 'mt-2')
+        removeButton.setAttribute('class', 'removeButton')
         removeButton.innerText = "Remove"
         removeButton.addEventListener('click', ()=> {
           removeBlog(json.data[i].id)
+          
+
         })
 
 
-        let els = [img, titleText, description, datePost, updateButton, removeButton]
+        let els = [img, titleText, description,username, datePost, updateButton, removeButton ]
         els.map(el => {
           blogCard.appendChild(el)
         })
 
         postsContainer.appendChild(blogCard)
       
-        console.log(json.data[i]);
         
       }
-      let addButton = document.createElement('button')
-      addButton.setAttribute('class', 'mt-2')
-      addButton.innerText = "ADD NEW BLOG"
-      addButton.addEventListener('click', addBlogModal)
-      let buttons = document.getElementById('buttons')
-      buttons.appendChild(addButton)
-
+      
       
     })
+}
+
+let addButton = document.createElement('button')
+addButton.setAttribute('class','mt-2 addBlogBtn')
+addButton.innerText = "ADD NEW BLOG"
+addButton.addEventListener('click', addBlogModal)
+let buttons = document.getElementById('buttons')
+buttons.appendChild(addButton)
+
+
+
+function removeAllBlogs() {
+  let elements = document.getElementsByClassName("blogCard")
+  for (let i= elements.length-1; i>=0; i--) {
+    elements[i].remove();
+  }
+
+}
+
+function removeBlog(id) {
+  let deleteBlog = {
+      secretKey: "ae1ZtcDKPIHf0VwkoUry",
+      id: id
+  } 
+  
+  fetch("http://167.99.138.67:1111/deletepost", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(deleteBlog)
+  }).then(res => res.json()).then(data => 
+    { 
+      removeAllBlogs()
+      updateBlogs()
+    })
+    
 }
 
 let addNewBlog = document.getElementById('addNewBlog')
@@ -104,13 +136,19 @@ function addBlog() {
           "Content-Type": "application/json"
       },
       body: JSON.stringify(newPost)
-  }).then(res => res.json()).then(data => console.log(data))
-
-  
+  }).then(res => res.json()).then(data => {
+      removeAllBlogs()
+      updateBlogs()
+      turnOffBlogModal()
+    })
 }
 
 function addBlogModal() {
   newBlogModal.style.display = 'block'
+}
+
+function turnOffBlogModal() {
+  newBlogModal.style.display = 'none'
 }
 
 function updateBlog() {
@@ -121,7 +159,6 @@ function updateBlog() {
     description: "Nežinau, kurią nuotrauką gavote, nes jų gali būti ir ne viena. Rinkimų kampanijos metu politikai mielai fotografuojasi su galimais rinkėjais, – sakė A. Zuokas ir pridūrė. – Mano širdis ir smegenys yra laisvi. Suprantama, kad tenka bendrauti su daug kuo ir tai yra natūralu"
   }
 
-  postsContainer = postsContainer.filter(id => updatePost.id !== id)
   fetch("http://167.99.138.67:1111/updatepost", {
       method: "POST",
       mode: "cors",
@@ -130,7 +167,7 @@ function updateBlog() {
       },
       body: JSON.stringify(updatePost)
   }).then(res => res.json()).then(data => console.log(data))
-  console.log(updatePost)
+  
 }
 
 
@@ -142,34 +179,21 @@ window.onload = function(){
   };
 };
 
-
-function removeBlog(id) {
-  let deleteBlog = {
-      secretKey: "ae1ZtcDKPIHf0VwkoUry",
-      id: id
-  }
-
-  postsContainer = postsContainer.filter(id => deleteBlog.id !== id)
-  
-  
-  fetch("http://167.99.138.67:1111/deletepost", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(deleteBlog)
-  }).then(res => res.json()).then(data => console.log(data))
-}
-
 function removeBlogModal() {
   deleteBlogModal.style.display = 'block'
+}
+
+// function particularUserBlogs() {
+  
+// }
+
+function openPressedBlog() {
+  fetch("http://167.99.138.67:1111/getsinglepost/pupudede/o6JbtlliWV'")
+  .then(res => res.json()).then(data => {
+  })
 }
 
 
 updateBlogs()
 
-
-localStorage.setItem("secretKey", "ae1ZtcDKPIHf0VwkoUry")
-console.log(localStorage);
 

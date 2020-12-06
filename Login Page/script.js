@@ -1,4 +1,6 @@
-
+function goToHomePage () {
+    window.location.href = '../Home%20Page/index.html';
+}
 
 function userLogin() {
     let user = {
@@ -13,9 +15,15 @@ function userLogin() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(user)
-    }).then(res => res.json()).then(data => console.log(data))
+    }).then(res => res.json()).then(data => {
+        if (data.success) {
+            localStorage.setItem("secretKey", data.secretKey)
+            goToHomePage();
+        } else {
+            console.log(data)
+        }
+    })
 }
 
-userLogin()
 
-
+console.log(localStorage)
